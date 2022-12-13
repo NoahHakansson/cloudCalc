@@ -8,7 +8,12 @@ import (
 )
 
 func main() {
-	err := server.Start()
+	r, err := server.Start()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	err = r.Run(":5000")
 	if err != nil {
 		log.Println(err)
 		return

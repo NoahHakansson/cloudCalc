@@ -25,20 +25,18 @@ type calcRequest struct {
 // Start function
 //
 // Starts server or returns an error.
-func Start() error {
+func Start() (*gin.Engine, error) {
 	r := gin.Default()
 	// set trusted proxy to localhost
 	err := r.SetTrustedProxies([]string{"127.0.0.1"})
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	// routes
-	r.POST("/api/calculate", calcEndpoint)
+	r.POST("/api/calc", calcEndpoint)
 
-	err = r.Run(":5000")
-
-	return err
+	return r, nil
 }
 
 func calcEndpoint(c *gin.Context) {
@@ -53,7 +51,12 @@ func calcEndpoint(c *gin.Context) {
 	result, err := calculate(calcReq.First, calcReq.Second, calcReq.Operator)
 	if err != nil {
 		log.Println(err.Error())
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":    err.Error(),
+			"first":    calcReq.First,
+			"second":   calcReq.Second,
+			"operator": calcReq.Operator,
+		})
 		return
 	}
 	// return result
