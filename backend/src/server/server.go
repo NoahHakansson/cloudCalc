@@ -36,10 +36,9 @@ func Start() error {
 	// routes
 	r.POST("/api/calculate", calcEndpoint)
 
-	if err = r.Run(":5000"); err != nil {
-		return err
-	}
-	return nil
+	err = r.Run(":5000")
+
+	return err
 }
 
 func calcEndpoint(c *gin.Context) {
@@ -50,24 +49,41 @@ func calcEndpoint(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	// calculate result
+	result, err := calculate(calcReq.First, calcReq.Second, calcReq.Operator)
+	if err != nil {
+		log.Println(err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	// return result
+	c.JSON(http.StatusOK, gin.H{
+		"status": "success",
+		"result": result,
+	})
 }
 
 // calculates the math operation given
 // uses a switch case internally.
 // Returns an error if operator is not recognised.
 func calculate(first float64, second float64, operator string) (float64, error) {
-	switch operatingSystem {
+	var result float64
+	switch operator {
+	// cases break automatically, no fallthrough by default
 	case "x":
 		fmt.Println("Multiplication")
-		// cases break automatically, no fallthrough by default
+		result = first * second
 	case "/":
 		fmt.Println("Division")
+		result = first / second
 	case "+":
 		fmt.Println("Addition")
+		result = first + second
 	case "-":
 		fmt.Println("Subtraction")
+		result = first - second
 	default:
-		// return error
 		return 0, errNotSupportedOperator
 	}
+	return result, nil
 }
