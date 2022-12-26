@@ -37,6 +37,15 @@ td{
 
 }
 
+.buttons {
+  background-color: #FFFFFF;
+	border-radius: 20px;
+}
+
+.buttons:hover {
+  background-color: #d1e0e0;
+}
+
 .orange{
 	color: #ff3300;
 }
