@@ -9,13 +9,8 @@ import (
 func main() {
 
 	// API routes
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello world from GfG")
-	})
-	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hi")
-	})
-
+  fileServer := http.FileServer(http.Dir("./static")) // New code
+  http.Handle("/", fileServer)
 	port := ":80"
 	fmt.Println("Server is running on port" + port)
 
