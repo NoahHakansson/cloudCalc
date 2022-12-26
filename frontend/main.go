@@ -7,14 +7,12 @@ import (
 )
 
 func main() {
-
 	// API routes
-  fileServer := http.FileServer(http.Dir("./static")) // New code
-  http.Handle("/", fileServer)
+	fileServer := http.FileServer(http.Dir("./static")) // New code
+	http.Handle("/", fileServer)
 	port := ":80"
 	fmt.Println("Server is running on port" + port)
 
 	// Start server on port specified above
 	log.Fatal(http.ListenAndServe(port, nil))
 }
-
