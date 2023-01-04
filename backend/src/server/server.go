@@ -10,6 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// TODO: move calculator stuff to its own package
+
 // variables
 
 var errNotSupportedOperator = errors.New("Error: Operator is not supported")
