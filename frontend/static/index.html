@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Calculator app</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="script.js"></script>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+  <script type="text/javascript" src="js/calc.js"></script>
 </head>
+
 <body>
-	<div>
-		<header id="screen"></header>
-		<table>
-		
-      		<tbody>
-				<tr class="orange">
-					<td class="buttons" onclick="clearScr()">AC</td>
-          <td class="buttons" onclick="sendNum('*0.01')">%</td>
-          <td class="buttons" onclick="sendNum('/')">/</td>
-				</tr>
-				<tr class="orange">
-					<td class="buttons" onclick="sendNum('+')">+</td>
-					<td class="buttons" onclick="sendNum('-')">-</td>
-					<td class="buttons" onclick="sendNum('*')">x</td>
-				</tr>
-				<tr >
-			    	<td class="buttons" onclick="sendNum('7')">7</td>
-			    	<td class="buttons" onclick="sendNum('8')">8</td>
-			    	<td class="buttons" onclick="sendNum('9')">9</td>
-				</tr>
-				<tr>
-					<td class="buttons" onclick="sendNum('4')">4</td>
-					<td class="buttons" onclick="sendNum('5')">5</td>
-					<td class="buttons" onclick="sendNum('6')">6</td>
-				</tr>
-				<tr>
-      		<td class="buttons" onclick="sendNum('1')">1</td>
-					<td class="buttons" onclick="sendNum('2')">2</td>
-					<td class="buttons" onclick="sendNum('3')">3</td>
-				</tr>
-				<tr>
-      		<td class="buttons" onclick="sendNum('.')">.</td>
-					<td class="buttons" onclick="sendNum('0')">0</td>
-					<td class="buttons" onclick="equalTo()">=</td>
-				</tr>	
-			</tbody>
-		</table>
-	</div>
+  <div class="calculator card">
+
+    <input type="text" id="calc-screen" class="calculator-screen z-depth-1" value="" disabled />
+
+    <div class="calculator-keys" id="calc-keys">
+
+      <button type="button" class="operator btn btn-info" value="+">+</button>
+      <button type="button" class="operator btn btn-info" value="-">-</button>
+      <button type="button" class="operator btn btn-info" value="*">&times;</button>
+      <button type="button" class="operator btn btn-info" value="/">&divide;</button>
+
+      <button onclick="" type="button" value="7" class="btn btn-light waves-effect">7</button>
+      <button type="button" value="8" class="btn btn-light waves-effect">8</button>
+      <button type="button" value="9" class="btn btn-light waves-effect">9</button>
+
+
+      <button type="button" value="4" class="btn btn-light waves-effect">4</button>
+      <button type="button" value="5" class="btn btn-light waves-effect">5</button>
+      <button type="button" value="6" class="btn btn-light waves-effect">6</button>
+
+
+      <button type="button" value="1" class="btn btn-light waves-effect">1</button>
+      <button type="button" value="2" class="btn btn-light waves-effect">2</button>
+      <button type="button" value="3" class="btn btn-light waves-effect">3</button>
+
+
+      <button type="button" value="0" class="btn btn-light waves-effect">0</button>
+      <button type="button" class="decimal function btn btn-secondary" value=".">.</button>
+      <button type="button" class="all-clear function btn btn-danger btn-sm" value="all-clear">AC</button>
+
+      <button type="button" class="equal-sign operator btn btn-default" value="=">=</button>
+
+    </div>
+  </div>
 </body>
+
 </html>

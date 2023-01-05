@@ -14,7 +14,7 @@ services:
     container_name: "cloud-course-frontend"
     image: nginx
     volumes:
-      - "./frontend:/usr/share/nginx/html:ro"
+      - "./frontend/static:/usr/share/nginx/html:ro"
     ports:
       - "3000:80"
     depends_on:
