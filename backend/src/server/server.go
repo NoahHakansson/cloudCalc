@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,12 +31,13 @@ type calcRequest struct {
 func Start() (*gin.Engine, error) {
 	r := gin.Default()
 	// set trusted proxy to localhost
-	err := r.SetTrustedProxies([]string{"127.0.0.1"})
+	err := r.SetTrustedProxies(nil)
 	if err != nil {
 		return nil, err
 	}
 
 	// routes
+	r.Use(cors.Default())
 	r.POST("/api/calc", calcEndpoint)
 
 	return r, nil
@@ -61,7 +63,15 @@ func calcEndpoint(c *gin.Context) {
 		})
 		return
 	}
+
+	c.Header("Access-Control-Allow-Origin", "*")
 	// return result
+	println(
+		"First: ", int(calcReq.First),
+		"Second: ", int(calcReq.Second),
+		"Operator: ", calcReq.Operator,
+		"Result: ", int(result),
+	)
 	c.JSON(http.StatusOK, gin.H{
 		"status": "success",
 		"result": result,
