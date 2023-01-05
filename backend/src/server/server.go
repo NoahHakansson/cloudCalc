@@ -73,8 +73,9 @@ func calcEndpoint(c *gin.Context) {
 		"Result: ", int(result),
 	)
 	c.JSON(http.StatusOK, gin.H{
-		"status": "success",
-		"result": result,
+		"status":    "success",
+		"operation": fmt.Sprintf("%f %s %f", calcReq.First, calcReq.Operator, calcReq.Second),
+		"result":    result,
 	})
 }
 
