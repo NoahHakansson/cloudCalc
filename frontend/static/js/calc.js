@@ -1,7 +1,7 @@
-
 /**
   takes the params as a JSON object { "key": value }
 */
+
 async function sendPOST(params) {
   var response;
   var json;
@@ -27,7 +27,6 @@ async function sendPOST(params) {
 
   return json.result;
 }
-
 
 const calculator = {
   displayValue: '0',
