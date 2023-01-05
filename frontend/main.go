@@ -1,3 +1,4 @@
+// Package main provides main
 package main
 
 import (
@@ -7,16 +8,10 @@ import (
 )
 
 func main() {
-
 	// API routes
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello world from GfG")
-	})
-	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hi")
-	})
-
-	port := ":5000"
+	fileServer := http.FileServer(http.Dir("./static")) // New code
+	http.Handle("/", fileServer)
+	port := ":3000"
 	fmt.Println("Server is running on port" + port)
 
 	// Start server on port specified above
