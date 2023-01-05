@@ -115,14 +115,14 @@ function updateDisplay() {
 updateDisplay();
 
 window.addEventListener("load", function() {
-  document.getElementById("calc-keys")?.addEventListener('click', (event) => {
+  document.getElementById("calc-keys")?.addEventListener('click', async (event) => {
     const { target } = event;
     if (!target.matches('button')) {
       return;
     }
 
     if (target.classList.contains('operator')) {
-      handleOperator(target.value);
+      await handleOperator(target.value);
       updateDisplay();
       return;
     }
