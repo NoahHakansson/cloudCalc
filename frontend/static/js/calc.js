@@ -1,3 +1,34 @@
+
+/**
+  takes the params as a JSON object { "key": value }
+*/
+async function sendPOST(params) {
+  var response;
+  var json;
+  try {
+    response = await fetch('http://localhost:5000/api/calc', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    })
+    if (response.ok) { // if HTTP-status is 200-299
+      // get the response body (the method explained below)
+      json = await response.json();
+    } else {
+      alert("HTTP-Error: " + response.status);
+    }
+    console.log(JSON.stringify(json));
+  } catch (error) {
+    alert(error)
+  }
+
+  return json.result;
+}
+
+
 const calculator = {
   displayValue: '0',
   firstOperand: null,
@@ -24,7 +55,7 @@ function inputDecimal(dot) {
   }
 }
 
-function handleOperator(nextOperator) {
+async function handleOperator(nextOperator) {
   const { firstOperand, displayValue, operator } = calculator
   const inputValue = parseFloat(displayValue);
 
@@ -37,7 +68,7 @@ function handleOperator(nextOperator) {
     calculator.firstOperand = inputValue;
   } else if (operator) {
     const currentValue = firstOperand || 0;
-    const result = performCalculation[operator](currentValue, inputValue);
+    const result = await performCalculation[operator](currentValue, inputValue);
 
     calculator.displayValue = String(result);
     calculator.firstOperand = result;
@@ -47,16 +78,25 @@ function handleOperator(nextOperator) {
   calculator.operator = nextOperator;
 }
 
+async function sendCalculation(first, second, operator) {
+  const result = await sendPOST({
+    "first": first,
+    "second": second,
+    "operator": operator,
+  })
+  return result;
+}
+
 const performCalculation = {
-  '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
+  '/': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '/'),
 
-  '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
+  '*': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, 'x'),
 
-  '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
+  '+': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '+'),
 
-  '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
+  '-': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '-'),
 
-  '=': (firstOperand, secondOperand) => secondOperand
+  '=': async (firstOperand, secondOperand) => secondOperand
 };
 
 function resetCalculator() {
