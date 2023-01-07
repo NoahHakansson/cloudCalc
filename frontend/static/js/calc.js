@@ -87,6 +87,8 @@ async function sendCalculation(first, second, operator) {
 }
 
 const performCalculation = {
+  '^': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '^'),
+
   '/': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '/'),
 
   '*': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, 'x'),
