@@ -116,6 +116,22 @@ function updateDisplay() {
 
 updateDisplay();
 
+function stressTest(amount) {
+  first = 2;
+  second = 1000;
+  operator = "^";
+  console.log("Success!")
+  for (let i = 0;i < amount;i++) {
+    sendPOST({
+      "first": first,
+      "second": second,
+      "operator": operator,
+  })
+
+  }
+
+}
+
 window.addEventListener("load", function() {
   document.getElementById("calc-keys")?.addEventListener('click', async (event) => {
     const { target } = event;
@@ -126,6 +142,12 @@ window.addEventListener("load", function() {
     if (target.classList.contains('operator')) {
       await handleOperator(target.value);
       updateDisplay();
+      return;
+    }
+
+    if (target.classList.contains('stressTest')) {
+      console.log("Success")
+      stressTest(10)
       return;
     }
 
@@ -141,7 +163,14 @@ window.addEventListener("load", function() {
       return;
     }
 
+    if (target.classList.contains('Submit')) {
+      let amount = document.getElementById('textInput').value;
+      stressTest(amount)
+      return;
+    }
+    
     inputDigit(target.value);
     updateDisplay();
   });
 });
+
