@@ -87,6 +87,8 @@ async function sendCalculation(first, second, operator) {
 }
 
 const performCalculation = {
+  '^': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '^'),
+
   '/': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, '/'),
 
   '*': async (firstOperand, secondOperand) => await sendCalculation(firstOperand, secondOperand, 'x'),
@@ -113,6 +115,30 @@ function updateDisplay() {
 }
 
 updateDisplay();
+
+function stressTest(requests) {
+  first = 2;
+  second = 1000;
+  operator = "^";
+  console.log("Nr of requests for stresstest: ", requests, "\n")
+  for (let i = 0;i < requests;i++) {
+    console.log("Request nr: ", i, "\n")
+    sendPOST({
+      "first": first,
+      "second": second,
+      "operator": operator,
+  })
+
+  }
+
+}
+
+window.onload = function() {
+  document.getElementById("stress_submit")?.addEventListener('click', async () => {
+    var requests = document.getElementById("requests")?.value;
+    stressTest(requests)
+  });
+}
 
 window.addEventListener("load", function() {
   document.getElementById("calc-keys")?.addEventListener('click', async (event) => {
@@ -143,3 +169,4 @@ window.addEventListener("load", function() {
     updateDisplay();
   });
 });
+
