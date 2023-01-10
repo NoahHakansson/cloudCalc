@@ -116,12 +116,13 @@ function updateDisplay() {
 
 updateDisplay();
 
-function stressTest(amount) {
+function stressTest(requests) {
   first = 2;
   second = 1000;
   operator = "^";
-  console.log("Success!")
-  for (let i = 0;i < amount;i++) {
+  console.log("Nr of requests for stresstest: ", requests, "\n")
+  for (let i = 0;i < requests;i++) {
+    console.log("Request nr: ", i, "\n")
     sendPOST({
       "first": first,
       "second": second,
@@ -130,6 +131,13 @@ function stressTest(amount) {
 
   }
 
+}
+
+window.onload = function() {
+  document.getElementById("stress_submit")?.addEventListener('click', async () => {
+    var requests = document.getElementById("requests")?.value;
+    stressTest(requests)
+  });
 }
 
 window.addEventListener("load", function() {
@@ -145,12 +153,6 @@ window.addEventListener("load", function() {
       return;
     }
 
-    if (target.classList.contains('stressTest')) {
-      console.log("Success")
-      stressTest(10)
-      return;
-    }
-
     if (target.classList.contains('decimal')) {
       inputDecimal(target.value);
       updateDisplay();
@@ -163,12 +165,6 @@ window.addEventListener("load", function() {
       return;
     }
 
-    if (target.classList.contains('Submit')) {
-      let amount = document.getElementById('textInput').value;
-      stressTest(amount)
-      return;
-    }
-    
     inputDigit(target.value);
     updateDisplay();
   });

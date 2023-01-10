@@ -1,6 +1,14 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  margin-top: 20vh;
+  background-color: grey;
 }
 
 *,
@@ -15,6 +23,7 @@ html {
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 400px;
+  background-color: darkgrey;
 }
 
 .calculator-screen {
@@ -57,3 +66,44 @@ button {
   grid-gap: 20px;
   padding: 20px;
 }
+
+#calc-stress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#stress_submit {
+  width: 50%;
+  height: 50px;
+  font-weight: bolder;
+}
+
+#requests {
+  width: 70%;
+  height: 50px;
+  font-size: 24px;
+}
+
+#stress-test-title {
+  font-size: 30px;
+}
+
+.link_button {
+  display: flex;
+  border: 3px solid black;
+  margin: 10px;
+  background-color: #252525;
+  padding: 6px;
+  justify-content: center;
+}
+
+.link_button a {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+

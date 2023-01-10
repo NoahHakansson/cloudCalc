@@ -87,7 +87,7 @@ func calculate(first float64, second float64, operator string) (float64, error) 
 	switch operator {
 	// cases break automatically, no fallthrough by default
 	case "^":
-		fmt.Println("Subtraction")
+		fmt.Println("Exponential")
     if second != 0 {
       result = first
       for i := 0.0;i < second;i++ {
