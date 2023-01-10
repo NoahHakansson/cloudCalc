@@ -6,6 +6,6 @@ services:
     container_name: "cloud-course-frontend"
     image: nginx
     volumes:
-      - "./frontend/static:/usr/share/nginx/html:ro"
+      - "./static:/usr/share/nginx/html:ro"
     ports:
-      - "3000:80"
+      - "80:80"
