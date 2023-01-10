@@ -52,9 +52,9 @@ func TestMultiplication(t *testing.T) {
 
 		// expected response
 		expectedJSON := gin.H{
-			"operation":"2.000000 x 3.000000",
-      "result":6,
-      "status":"success",
+			"operation": "2.000000 x 3.000000",
+			"result":    6,
+			"status":    "success",
 		}
 		expected, _ := json.Marshal(expectedJSON)
 
@@ -76,9 +76,9 @@ func TestMultiplication(t *testing.T) {
 
 		// expected response
 		expectedJSON := gin.H{
-      "operation":"-2.000000 x 3.000000",
-      "result":-6,
-      "status":"success",
+			"operation": "-2.000000 x 3.000000",
+			"result":    -6,
+			"status":    "success",
 		}
 		expected, _ := json.Marshal(expectedJSON)
 
