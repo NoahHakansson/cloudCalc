@@ -26,7 +26,8 @@ func main() {
 
 	req.Header.Add("Content-Type", "application/json")
 
-	for i := 0; i < nrOfRequests; i++ {
+	for i := 0; i < nrOfRequests-1; i++ {
+		fmt.Println("requet NR: ", i+1)
 		res, err := http.DefaultClient.Do(req)
 		if err != nil {
 			fmt.Println(err)
