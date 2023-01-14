@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -79,6 +80,18 @@ func calcEndpoint(c *gin.Context) {
 	})
 }
 
+func stressRoutine(waitgroup *sync.WaitGroup) {
+  operation := 0
+  for i := 0;i < 1000;i++ {
+    for j := 0;j < 1000;j++ {
+      for k := 0;k < 100;k++ {
+        operation = operation + i * j * k
+      }
+    }
+  } 
+  waitgroup.Done()
+}
+
 // calculates the math operation given
 // uses a switch case internally.
 // Returns an error if operator is not recognised.
@@ -86,6 +99,14 @@ func calculate(first float64, second float64, operator string) (float64, error) 
 	var result float64
 	switch operator {
 	// cases break automatically, no fallthrough by default
+  case "stress":
+    fmt.Println("Commencing stress...")
+    var waitgroups sync.WaitGroup
+    for i := 0;i < 1000;i++ {
+      go stressRoutine(&waitgroups)
+    }   
+    waitgroups.Wait()
+    fmt.Println("Done")
 	case "^":
 		fmt.Println("Exponential")
 		if second != 0 {

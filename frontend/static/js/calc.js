@@ -116,27 +116,19 @@ function updateDisplay() {
 
 updateDisplay();
 
-function stressTest(requests) {
-  first = 2;
-  second = 1000;
-  operator = "^";
-  console.log("Nr of requests for stresstest: ", requests, "\n")
-  for (let i = 0;i < requests;i++) {
-    console.log("Request nr: ", i, "\n")
+function stressTest() {
+  first = 0;
+  second = 0;
+  operator = "stress";
     sendPOST({
       "first": first,
       "second": second,
       "operator": operator,
   })
-
-  }
-
 }
-
 window.onload = function() {
   document.getElementById("stress_submit")?.addEventListener('click', async () => {
-    var requests = document.getElementById("requests")?.value;
-    stressTest(requests)
+    stressTest()
   });
 }
 
