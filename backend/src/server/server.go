@@ -81,15 +81,15 @@ func calcEndpoint(c *gin.Context) {
 }
 
 func stressRoutine(waitgroup *sync.WaitGroup) {
-  operation := 0
-  for i := 0;i < 1000;i++ {
-    for j := 0;j < 1000;j++ {
-      for k := 0;k < 100;k++ {
-        operation = operation + i * j * k
-      }
-    }
-  } 
-  waitgroup.Done()
+	operation := 0
+	for i := 0; i < 1000; i++ {
+		for j := 0; j < 1000; j++ {
+			for k := 0; k < 100; k++ {
+				operation = operation + i*j*k
+			}
+		}
+	}
+	waitgroup.Done()
 }
 
 // calculates the math operation given
@@ -99,14 +99,15 @@ func calculate(first float64, second float64, operator string) (float64, error) 
 	var result float64
 	switch operator {
 	// cases break automatically, no fallthrough by default
-  case "stress":
-    fmt.Println("Commencing stress...")
-    var waitgroups sync.WaitGroup
-    for i := 0;i < 1000;i++ {
-      go stressRoutine(&waitgroups)
-    }   
-    waitgroups.Wait()
-    fmt.Println("Done")
+	case "stress":
+		fmt.Println("Commencing stress...")
+		var wg sync.WaitGroup
+		for i := 0; i < 100; i++ {
+			wg.Add(1)
+			go stressRoutine(&wg)
+		}
+		wg.Wait()
+		fmt.Println("Done")
 	case "^":
 		fmt.Println("Exponential")
 		if second != 0 {
