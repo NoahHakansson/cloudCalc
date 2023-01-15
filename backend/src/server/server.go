@@ -102,7 +102,7 @@ func calculate(first float64, second float64, operator string) (float64, error) 
 	case "stress":
 		fmt.Println("Commencing stress...")
 		var wg sync.WaitGroup
-		for i := 0; i < 100; i++ {
+		for i := 0; i < 1000; i++ {
 			wg.Add(1)
 			go stressRoutine(&wg)
 		}
